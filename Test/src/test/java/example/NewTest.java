@@ -5,10 +5,16 @@ import org.testng.annotations.Test;
 import junit.framework.Assert;
 
 import org.testng.annotations.BeforeTest;
+
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.AfterTest;
 
 public class NewTest {
@@ -19,13 +25,30 @@ public class NewTest {
   @Test
   public void testEasy() {
 	  
-	  System.setProperty("webdriver.chrome.driver", "D:\\Softwares\\chromedriver_win32 (1)\\chromedriver.exe");
+	  System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromedriver.exe");
 		 
 	  driver=new ChromeDriver();
 	//  driver.manage().window().maximize();
-	  driver.get("https://www.google.co.in");
-	  String title = driver.getTitle();	
-	  Assert.assertEquals(title, "Google");
+	  //WebElement Searchbox = driver.findElement(By.id("lst-ib"));
+	  
+	  driver.get("http://localhost:8094/spring-mvc-example/");
+	  String title = driver.getCurrentUrl();
+		System.out.println("Getting the title:"+title);
+		WebElement Searchbox = driver.findElement(By.name("userName"));
+		System.out.println("The value is:"+Searchbox);
+		//Searchbox.sendKeys("sudhaaug84@gmail.com");
+		Searchbox.sendKeys("abc");
+		//driver.manage().timeouts().implicitlyWait(1, TimeUnit.MINUTES);
+		Searchbox.submit();
+		System.out.println("after click");
+		
+	
+	//driver.get("Hello World");
+	 // Searchbox.click();
+	  ;
+	 
+	  //String title = driver.getTitle();	
+	 // Assert.assertEquals(title, "Google");
 	  
 	//  WebElement Searchbox = driver.findElement(By.id("lst-ib"));
 	  //Searchbox.sendKeys("Software Testing Studio");
